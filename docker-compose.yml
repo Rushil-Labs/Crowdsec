@@ -1,0 +1,20 @@
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    container_name: crowdsec
+    environment:
+#      GID: 1000
+      TZ: America/Toronto
+      COLLECTIONS: crowdsecurity/linux crowdsecurity/caddy crowdsecurity/appsec-generic-rules crowdsecurity/appsec-virtual-patching
+    volumes:
+      - /home/dietpi/crowdsec/config/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - /home/dietpi/crowdsec/crowdsec-db:/var/lib/crowdsec/data/
+      - /home/dietpi/crowdsec/config:/etc/crowdsec/
+      - /home/dietpi/caddy/logs:/var/log/caddy:ro
+    networks:
+      - caddy
+    restart: unless-stopped
+
+networks:
+  caddy:
+    external: true

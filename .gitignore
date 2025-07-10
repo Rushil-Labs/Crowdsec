@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# But do not ignore these files
+!docker-compose.yml
+!.gitignore
+
+# Allow only specific config file(s)
+!config/
+config/*
+!config/acquis.yaml
